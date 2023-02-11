@@ -4,13 +4,13 @@
 [![Downloads][downloads-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
 
-[build-status]:https://travis-ci.org/EddyVerbruggen/cordova-plugin-googleplus.svg?branch=master
-[build-url]:https://travis-ci.org/EddyVerbruggen/cordova-plugin-googleplus
+[build-status]:https://travis-ci.org/okanbeydanol/cordova-plugin-googleplus.svg?branch=master
+[build-url]:https://travis-ci.org/okanbeydanol/cordova-plugin-googleplus
 [npm-image]:http://img.shields.io/npm/v/cordova-plugin-googleplus.svg
 [npm-url]:https://npmjs.org/package/cordova-plugin-googleplus
 [downloads-image]:http://img.shields.io/npm/dm/cordova-plugin-googleplus.svg
-[twitter-image]:https://img.shields.io/twitter/follow/eddyverbruggen.svg?style=social&label=Follow%20me
-[twitter-url]:https://twitter.com/eddyverbruggen
+[twitter-image]:https://img.shields.io/twitter/follow/okanbeydanol.svg?style=social&label=Follow%20me
+[twitter-url]:https://twitter.com/okanbeydanol
 
 > ⚠️ From plugin version 6.0.0 the minimum required cordova-ios version is 4.5.0. Need to use a lower cordova-ios version? Use plugin version 5.3.2 or lower.
 
@@ -40,15 +40,15 @@ This plugin only wraps access to the Google Sign-In API. Further API access shou
 
 Android
 
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/Android1.png" width="235" height="400"/>&nbsp;
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/Android2.png" width="235" height="400"/>&nbsp;
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/Android3.png" width="235" height="400"/>
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android1.png" width="235" height="400"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android2.png" width="235" height="400"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android3.png" width="235" height="400"/>
 
  iOS
 
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/iOS1.png" width="235" height="417"/>&nbsp;
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/iOS2.png" width="235" height="417"/>&nbsp;
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/cordova-plugin-googleplus/master/screenshots/iOS3.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS1.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS2.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS3.png" width="235" height="417"/>&nbsp;
 
 ## 3. Google API setup
 To communicate with Google you need to do some tedious setup, sorry.
@@ -122,7 +122,7 @@ $ cordova prepare
 
 Using the Cordova CLI to fetch the latest version from GitHub:
 ```
-$ cordova plugin add https://github.com/EddyVerbruggen/cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=myreversedclientid  --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
+$ cordova plugin add https://github.com/okanbeydanol/cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=myreversedclientid  --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
 $ cordova prepare
 ```
 
@@ -149,7 +149,7 @@ For the (stable) NPM Version:
 
 For the latest version from Git (not recommended):
 ```xml
-<plugin spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git" source="git">
+<plugin spec="https://github.com/okanbeydanol/cordova-plugin-googleplus.git" source="git">
   <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
   <variable name="WEB_APPLICATION_CLIENT_ID" value="mywebapplicationclientid" />
 <plugin>
@@ -221,7 +221,7 @@ window.plugins.googleplus.login(
 
 The success callback (second argument) gets a JSON object with the following contents, with example data of my Google account:
 ```javascript
- obj.email          // 'eddyverbruggen@gmail.com'
+ obj.email          // 'okanbeydanol@gmail.com'
  obj.userId         // user id
  obj.displayName    // 'Eddy Verbruggen'
  obj.familyName     // 'Verbruggen'
