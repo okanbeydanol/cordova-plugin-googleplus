@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-googleplus"
-        version="8.6.2">
+        version="8.6.3">
 
   <name>Google SignIn</name>
 
@@ -102,7 +102,7 @@
     <framework src="libz.dylib" weak="true" />
 
     <!-- Google frameworks -->
-    <preference name="GOOGLE_SIGN_IN_VERSION" default="~> 6.0"/>
+    <preference name="GOOGLE_SIGN_IN_VERSION" default="~> 5.0.2"/>
     <preference name="GOOGLE_UTILITIES_VERSION" default="~> 7.11.0"/>
     <podspec>
       <config>
