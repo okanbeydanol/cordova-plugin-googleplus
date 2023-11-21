@@ -42,7 +42,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Originally written by Eddy Verbruggen (http://github.com/EddyVerbruggen/cordova-plugin-googleplus)
+ * Originally written by Eddy Verbruggen (http://github.com/okanbeydanol/cordova-plugin-googleplus)
  * Forked/Duplicated and Modified by PointSource, LLC, 2016.
  */
 public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConnectionFailedListener {

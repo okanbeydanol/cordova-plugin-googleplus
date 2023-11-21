@@ -45,6 +45,7 @@ Android
 <img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/iOS2.png" width="235" height="417"/>&nbsp;
 <img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/iOS3.png" width="235" height="417"/>&nbsp;
 
+
 ## 3. Google API setup
 To communicate with Google you need to do some tedious setup, sorry.
 
