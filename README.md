@@ -3,9 +3,9 @@
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
 
-[npm-image]:http://img.shields.io/npm/v/cordova-plugin-googleplus-standard.svg
-[npm-url]:https://npmjs.org/package/cordova-plugin-googleplus-standard
-[downloads-image]:http://img.shields.io/npm/dm/cordova-plugin-googleplus-standard.svg
+[npm-image]:http://img.shields.io/npm/v/cordova-plugin-googleplus.svg
+[npm-url]:https://npmjs.org/package/cordova-plugin-googleplus
+[downloads-image]:http://img.shields.io/npm/dm/cordova-plugin-googleplus.svg
 
 > ⚠️ From plugin version 6.0.0 the minimum required cordova-ios version is 4.5.0. Need to use a lower cordova-ios version? Use plugin version 5.3.2 or lower.
 
@@ -110,9 +110,9 @@ This plugin is compatible with:
 
 Here's how it works (backup your project first!):
 
-Using the Cordova CLI and [npm](https://www.npmjs.com/package/cordova-plugin-googleplus-standard):
+Using the Cordova CLI and [npm](https://www.npmjs.com/package/cordova-plugin-googleplus):
 ```
-$ cordova plugin add cordova-plugin-googleplus-standard --save --variable REVERSED_CLIENT_ID=myreversedclientid --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
+$ cordova plugin add cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=myreversedclientid --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
 $ cordova prepare
 ```
 
@@ -151,7 +151,7 @@ Add this to your config.xml:
 
 For the (stable) NPM Version:
 ```xml
-<plugin name="cordova-plugin-googleplus-standard" source="npm">
+<plugin name="cordova-plugin-googleplus" source="npm">
   <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
   <variable name="WEB_APPLICATION_CLIENT_ID" value="mywebapplicationclientid" />
 </plugin>
