@@ -14,9 +14,9 @@
 
   <keywords>Google, Google SignIn, GoogleSignIn, Google Login, Login, OAuth, Identity, Authentication</keywords>
 
-  <repo>https://github.com/recifra/cordova-plugin-googleplus.git</repo>
+  <repo>https://github.com/okanbeydanol/cordova-plugin-googleplus.git</repo>
 
-  <issue>https://github.com/recifra/cordova-plugin-googleplus/issues</issue>
+  <issue>https://github.com/okanbeydanol/cordova-plugin-googleplus/issues</issue>
 
   <engines>
     <engine name="cordova" version=">=7.1.0"/>

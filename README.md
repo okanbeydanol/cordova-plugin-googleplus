@@ -35,15 +35,15 @@ This plugin only wraps access to the Google Sign-In API. Further API access shou
 
 Android
 
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/Android1.png" width="235" height="400"/>&nbsp;
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/Android2.png" width="235" height="400"/>&nbsp;
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/Android3.png" width="235" height="400"/>
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android1.png" width="235" height="400"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android2.png" width="235" height="400"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/Android3.png" width="235" height="400"/>
 
  iOS
 
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/iOS1.png" width="235" height="417"/>&nbsp;
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/iOS2.png" width="235" height="417"/>&nbsp;
-<img src="https://raw.githubusercontent.com/recifra/cordova-plugin-googleplus/master/screenshots/iOS3.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS1.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS2.png" width="235" height="417"/>&nbsp;
+<img src="https://raw.githubusercontent.com/okanbeydanol/cordova-plugin-googleplus/master/screenshots/iOS3.png" width="235" height="417"/>&nbsp;
 
 
 ## 3. Google API setup
@@ -118,7 +118,7 @@ $ cordova prepare
 
 Using the Cordova CLI to fetch the latest version from GitHub (not recommended):
 ```
-$ cordova plugin add https://github.com/recifra/cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=myreversedclientid  --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
+$ cordova plugin add https://github.com/okanbeydanol/cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=myreversedclientid  --variable WEB_APPLICATION_CLIENT_ID=mywebapplicationclientid
 $ cordova prepare
 ```
 
@@ -159,7 +159,7 @@ For the (stable) NPM Version:
 
 For the latest version from Git (not recommended):
 ```xml
-<plugin spec="https://github.com/recifra/cordova-plugin-googleplus.git" source="git">
+<plugin spec="https://github.com/okanbeydanol/cordova-plugin-googleplus.git" source="git">
   <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
   <variable name="WEB_APPLICATION_CLIENT_ID" value="mywebapplicationclientid" />
 <plugin>
