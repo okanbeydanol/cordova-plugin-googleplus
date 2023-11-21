@@ -3,8 +3,6 @@ package nl.xservices.plugins;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -24,7 +22,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.api.Scope;
 
 import org.apache.cordova.*;
-import org.apache.cordova.engine.SystemWebChromeClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +34,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import android.content.pm.Signature;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Originally written by Eddy Verbruggen (http://github.com/okanbeydanol/cordova-plugin-googleplus)
@@ -70,9 +73,25 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
     private GoogleApiClient mGoogleApiClient;
     private CallbackContext savedCallbackContext;
 
+    private ActivityResultLauncher<Intent>  signInActivityLauncher;
+
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+
+        AppCompatActivity cordovaActivity = cordova.getActivity();
+
+        this.signInActivityLauncher = cordovaActivity.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    public void onActivityResult(ActivityResult result) {
+                        Log.i(TAG, "One of our activities finished up");
+                        // Call handleSignInResult passing in sign in result object
+                        Intent intent = result.getData();
+                        handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(intent));
+                    }
+                });
+
     }
 
     @Override
@@ -80,8 +99,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         this.savedCallbackContext = callbackContext;
 
         if (ACTION_IS_AVAILABLE.equals(action)) {
-            final boolean avail = true;
-            savedCallbackContext.success("" + avail);
+            final boolean available = true;
+            savedCallbackContext.success(toStatus("success", String.valueOf(available)));
 
         } else if (ACTION_LOGIN.equals(action)) {
             //pass args into api client build
@@ -89,7 +108,6 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
             // Tries to Log the user in
             Log.i(TAG, "Trying to Log in!");
-            cordova.setActivityResultCallback(this); //sets this class instance to be an activity result listener
             signIn();
 
         } else if (ACTION_TRY_SILENT_LOGIN.equals(action)) {
@@ -194,7 +212,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(this.mGoogleApiClient);
-        cordova.getActivity().startActivityForResult(signInIntent, RC_GOOGLEPLUS);
+        this.signInActivityLauncher.launch(signInIntent);
     }
 
     /**
@@ -213,7 +231,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      */
     private void signOut() {
         if (this.mGoogleApiClient == null) {
-            savedCallbackContext.error("Please use login or trySilentLogin before logging out");
+            savedCallbackContext.error(toStatus("error", "Please use login or trySilentLogin before logging out"));
             return;
         }
 
@@ -226,9 +244,9 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         public void onResult(Status status) {
                             //on success, tell cordova
                             if (status.isSuccess()) {
-                                savedCallbackContext.success("Logged user out");
+                                savedCallbackContext.success(toStatus("success", "Logged user out"));
                             } else {
-                                savedCallbackContext.error(status.getStatusCode());
+                                savedCallbackContext.error(toStatus("error", String.valueOf(status.getStatusCode())));
                             }
                         }
                     }
@@ -241,7 +259,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      */
     private void disconnect() {
         if (this.mGoogleApiClient == null) {
-            savedCallbackContext.error("Please use login or trySilentLogin before disconnecting");
+            savedCallbackContext.error(toStatus("error", "Please use login or trySilentLogin before disconnecting"));
             return;
         }
 
@@ -253,9 +271,9 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         @Override
                         public void onResult(Status status) {
                             if (status.isSuccess()) {
-                                savedCallbackContext.success("Disconnected user");
+                                savedCallbackContext.success(toStatus("success", "Disconnected user"));
                             } else {
-                                savedCallbackContext.error(status.getStatusCode());
+                                savedCallbackContext.error(toStatus("error", String.valueOf(status.getStatusCode())));
                             }
                         }
                     }
@@ -271,34 +289,9 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         Log.i(TAG, "Unresolvable failure in connecting to Google APIs");
-        savedCallbackContext.error(result.getErrorCode());
+        savedCallbackContext.error(toStatus("error", String.valueOf(result.getErrorCode())));
     }
 
-    /**
-     * Listens for and responds to an activity result. If the activity result request code matches our own,
-     * we know that the sign in Intent that we started has completed.
-     *
-     * The result is retrieved and send to the handleSignInResult function.
-     *
-     * @param requestCode The request code originally supplied to startActivityForResult(),
-     * @param resultCode The integer result code returned by the child activity through its setResult().
-     * @param intent Information returned by the child activity
-     */
-    @Override
-    public void onActivityResult(int requestCode, final int resultCode, final Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        Log.i(TAG, "In onActivityResult");
-
-        if (requestCode == RC_GOOGLEPLUS) {
-            Log.i(TAG, "One of our activities finished up");
-            //Call handleSignInResult passing in sign in result object
-            handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(intent));
-        }
-        else {
-            Log.i(TAG, "This wasn't one of our activities");
-        }
-    }
 
     /**
      * Function for handling the sign in result
@@ -319,12 +312,12 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      */
     private void handleSignInResult(final GoogleSignInResult signInResult) {
         if (this.mGoogleApiClient == null) {
-            savedCallbackContext.error("GoogleApiClient was never initialized");
+            savedCallbackContext.error(toStatus("error", "GoogleApiClient was never initialized"));
             return;
         }
 
         if (signInResult == null) {
-          savedCallbackContext.error("SignInResult is null");
+          savedCallbackContext.error(toStatus("error", "SignInResult is null"));
           return;
         }
 
@@ -334,7 +327,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             Log.i(TAG, "Wasn't signed in");
 
             //Return the status code to be handled client side
-            savedCallbackContext.error(signInResult.getStatus().getStatusCode());
+            savedCallbackContext.error(toStatus("error", String.valueOf(signInResult.getStatus().getStatusCode())));
         } else {
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -356,9 +349,9 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         result.put("familyName", acct.getFamilyName());
                         result.put("givenName", acct.getGivenName());
                         result.put("imageUrl", acct.getPhotoUrl());
-                        savedCallbackContext.success(result);
+                        savedCallbackContext.success(result.toString());
                     } catch (Exception e) {
-                        savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
+                        savedCallbackContext.error(toStatus("error", "Trouble obtaining result, error: " + e.getMessage()));
                     }
                     return null;
                 }
@@ -390,11 +383,11 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             // strip the last ':'
             strResult = strResult.substring(0, strResult.length()-1);
             strResult = strResult.toUpperCase();
-            this.savedCallbackContext.success(strResult);
+            this.savedCallbackContext.success(toStatus("success", strResult));
 
         } catch (Exception e) {
             e.printStackTrace();
-            savedCallbackContext.error(e.getMessage());
+            savedCallbackContext.error(toStatus("error", e.getMessage()));
         }
     }
 
@@ -454,5 +447,16 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         }
         reader.close();
         return sb.toString();
+    }
+
+    public static String toStatus(String status, String message) {
+        try {
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("status", status);
+            jsonResponse.put("message", message);
+            return jsonResponse.toString();
+        } catch (JSONException e) {
+            return "{\"status\": \"error\", \"message\": \"Failed to convert status into JSON\"}";
+        }
     }
 }

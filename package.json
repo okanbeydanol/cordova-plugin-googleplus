@@ -1,17 +1,16 @@
 {
-  "version": "8.6.3",
-  "name": "cordova-plugin-googleplus",
+  "version": "9.0.1",
   "cordova_name": "Google SignIn",
   "description": "Use your Google account to authenticate with the app.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/okanbeydanol/cordova-plugin-googleplus.git"
+    "url": "https://github.com/recifra/cordova-plugin-googleplus.git"
   },
   "bugs": {
-    "url": "https://github.com/okanbeydanol/cordova-plugin-googleplus/issues"
+    "url": "https://github.com/recifra/cordova-plugin-googleplus/issues"
   },
-  "homepage": "https://github.com/okanbeydanol/cordova-plugin-googleplus#readme",
+  "homepage": "https://github.com/recifra/cordova-plugin-googleplus#readme",
   "keywords": [
     "Google",
     "Google SignIn",
@@ -33,11 +32,5 @@
   ],
   "dependencies": {
     "q": "*"
-  },
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=3.5.0"
-    }
-  ]
+  }
 }

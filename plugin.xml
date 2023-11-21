@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-googleplus"
-        version="8.6.3">
+        id="cordova-plugin-googleplus-standard"
+        version="9.0.0">
 
   <name>Google SignIn</name>
 
@@ -14,9 +14,9 @@
 
   <keywords>Google, Google SignIn, GoogleSignIn, Google Login, Login, OAuth, Identity, Authentication</keywords>
 
-  <repo>https://github.com/okanbeydanol/cordova-plugin-googleplus.git</repo>
+  <repo>https://github.com/recifra/cordova-plugin-googleplus.git</repo>
 
-  <issue>https://github.com/okanbeydanol/cordova-plugin-googleplus/issues</issue>
+  <issue>https://github.com/recifra/cordova-plugin-googleplus/issues</issue>
 
   <engines>
     <engine name="cordova" version=">=7.1.0"/>
@@ -30,9 +30,10 @@
   <!-- android -->
   <platform name="android">
 
-	<preference name="PLAY_SERVICES_VERSION" default="15.0.1"/>
-    <framework src="com.google.android.gms:play-services-auth:$PLAY_SERVICES_VERSION" />
-    <framework src="com.google.android.gms:play-services-identity:$PLAY_SERVICES_VERSION" />
+    <preference name="PLAY_SERVICES_AUTH_VERSION" default="20.3.0"/>
+    <preference name="PLAY_SERVICES_IDENTITY_VERSION" default="18.0.1"/>
+    <framework src="com.google.android.gms:play-services-auth:$PLAY_SERVICES_AUTH_VERSION" />
+    <framework src="com.google.android.gms:play-services-identity:$PLAY_SERVICES_IDENTITY_VERSION" />
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="GooglePlus">
@@ -102,8 +103,8 @@
     <framework src="libz.dylib" weak="true" />
 
     <!-- Google frameworks -->
-    <preference name="GOOGLE_SIGN_IN_VERSION" default="~> 5.0.2"/>
-    <preference name="GOOGLE_UTILITIES_VERSION" default="~> 7.11.0"/>
+    <preference name="GOOGLE_SIGN_IN_VERSION" default="~> 6.2.3"/>
+    <preference name="GOOGLE_UTILITIES_VERSION" default="~> 7.4"/>
     <podspec>
       <config>
         <source url="https://cdn.cocoapods.org/"/>
@@ -113,6 +114,7 @@
         <pod name="GoogleUtilities" spec="$GOOGLE_UTILITIES_VERSION"/>
       </pods>
     </podspec>
+    <hook type="after_plugin_install" src="hooks/ios/prerequisites.js"/>
   </platform>
 
   <!-- browser -->
