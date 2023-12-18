@@ -56,7 +56,7 @@
         } else {
             NSString *email = user.profile.email;
             NSString *userId = user.userID;
-            NSString *accessToken = user.accessToken;
+            NSString *accessToken = user.authentication.accessToken;
             NSURL *imageUrl = [user.profile imageURLWithDimension:120]; // TODO pass in img size as param, and try to sync with Android
             NSDictionary *result = @{
                            @"accessToken"     : accessToken,
